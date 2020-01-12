@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Box from './component/box/Box'
 import Weather from './containers/weather/Weather'
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
        <Weather/>
       </header>
+      
     </div>
   );
 }

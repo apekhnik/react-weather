@@ -1,0 +1,35 @@
+.box {
+    width: 500px;
+    height: 500px;
+    border-radius: 30px;
+    text-align: left;
+    background-position: 100%;
+}
+.box-container {
+    display: flex;
+}
+.night {
+    background-image: url('../../img/night.jpg');
+}
+.day{
+    background-image: url('../../img/day.jpg');
+}
+.cloudDay{
+    background-image: url('../../img/cloudDay.jpg');
+}
+.rainDay{
+    background-image: url('../../img/rainDay.jpg');
+    background-size: cover
+}
+.clearDay{
+    background-image: url('../../img/sunDay.jpg');
+    background-size: cover
+}
+.snowDay{
+    background-image: url('../../img/snowDay.jpg');
+    background-size: cover
+}
+.mistDay{
+    background-image: url('../../img/mistDay.jpg');
+    background-size: cover
+}

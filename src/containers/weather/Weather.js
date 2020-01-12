@@ -1,14 +1,26 @@
 import React, {Component} from 'react'
-
+import Box from '../../component/box/Box'
+import Loader from '../../component/Loader/Loader'
 export default class Weather extends Component {
     state={
         data: [],
         weather: [],
         coord: [],
+        loading: true
     }
     async componentDidMount(){
+        this.getData()
+    }
+    onChangeHandler = (e) =>{
+        this.setState({
+            findPlace: e.target.value
+        })
+        console.log(this.state.findPlace);
+    }
+     getData  = async(url)  =>{
         try{
-            const response = await fetch('http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&APPID=349083c430ac053a45a0745df28c1425')
+            const FIND_CITY = this.state.findPlace || 'Milan'
+            const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${FIND_CITY}&units=metric&APPID=349083c430ac053a45a0745df28c1425`)
                                         .then(response=>response.json())
             this.setState({
                 data: response,
@@ -26,8 +38,11 @@ export default class Weather extends Component {
                     windDeg: response.wind.deg,
                     country: response.sys.country,
                     sunrise: response.sys.synrise,
-                    sunset: response.sys.sunset
-                }
+                    sunset: response.sys.sunset,
+                    name: response.name
+                },
+                loading: false,
+                findPlace: ''
             })
             
             console.log(response);
@@ -37,18 +52,36 @@ export default class Weather extends Component {
             console.log(e);
         }
     }
+    findPlace = ({key}) => {
+        const {taskText} = this.state;
+        if(key === 'Enter'){
+           let find = this.state.findPlace
+           this.getData(find)
+           this.setState({
+            findPlace: ''
+           })
+        }
+    }
     render(){
-        const {name, weather} = this.state
-        console.log(this.state.weather.country);
+        const { weather} = this.state
         
         return(
             <div>
-            <p>{name}</p>
-              <p>LON {this.state.coord.lon}</p>
-              <p>LAT {this.state.coord.lat}</p>
-                <h1>{weather.windSpeed}</h1>
-                <h2>{weather.description}</h2>
-    <h3>pressure => {}</h3>
+                <input type='text'  onKeyPress={this.findPlace} onChange={this.onChangeHandler} value={this.state.findPlace}/>
+                {!this.state.loading 
+                ?
+                <Box
+                sky={weather.main}
+                country={weather.country}
+                city={weather.name}
+                temp={weather.temp}
+                temp_max={weather.temp_max}
+                temp_min={weather.temp_min}
+                feelsLike={weather.feelsLike}
+                windSpeed={weather.windSpeed}
+                windDeg={weather.windDeg}
+                />:<Loader/>
+            }
             </div>
         )
     }
