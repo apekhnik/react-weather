@@ -8,6 +8,9 @@
 .box-container {
     display: flex;
 }
+.box-container__item{
+    width: 50%;
+}
 .night {
     background-image: url('../../img/night.jpg');
 }

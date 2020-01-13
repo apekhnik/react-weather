@@ -64,7 +64,6 @@ export default class Weather extends Component {
     }
     render(){
         const { weather} = this.state
-        
         return(
             <div>
                 <input type='text'  onKeyPress={this.findPlace} onChange={this.onChangeHandler} value={this.state.findPlace}/>
