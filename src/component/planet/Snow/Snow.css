@@ -1,11 +1,11 @@
-.moon {
+.Snow {
     width: 100%;
     height: 80%;
-    background-image: url('../../../img/moon.png');
+    background-image: url('../../../img/snow.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
-/* .moon img {
+/* .Snow img {
     width: 100%;
     height: auto;
 } */

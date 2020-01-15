@@ -1,8 +1,11 @@
 .cloud {
     width: 100%;
-    height: 100%;
+    height: 80%;
+    background-image: url('../../../img/cloud-day.png');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
-.cloud img {
+/* .cloud img {
     width: 100%;
     height: auto;
-}
+} */

@@ -1,11 +1,11 @@
-.moon {
+.Rain {
     width: 100%;
     height: 80%;
-    background-image: url('../../../img/moon.png');
+    background-image: url('../../../img/rain-day.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
-/* .moon img {
+/* .Rain img {
     width: 100%;
     height: auto;
 } */
