@@ -5,21 +5,24 @@ import Moon from '../planet/moon/Moon'
 import Cloud from '../planet/cloud/Cloud'
 import Snow from '../planet/Snow/Snow'
 import classnames from 'classnames'
+import Clock from '../Clock/Clock'
+import Mist from '../planet/mist/Mist'
 import RainDay from '../planet/Rain/Rain-day'
 export default class Box extends Component {
     state ={
-        currentTime: ''
+        currentTime: '',
+        actualTime: ''
     }
     componentDidMount(){
         var date = new Date();
-        this.setState({
-            currentTime:date.getHours()
-        })
-     
+       
+       this.setState({
+        currentTime: date.getHours()
+       })
     }
     
     whatTime(time){
-       
+
        return  time> 19 || time < 6 ? 'night' : 'day'
        
     }
@@ -37,6 +40,25 @@ export default class Box extends Component {
             return 'Юго-Восток'
         }
         
+    }
+    translate(weather){
+        
+        switch(weather){
+            case 'Clear':
+                return 'Ясно'
+            case 'Clouds':
+                return 'Облачно'
+            case 'Snow':
+                return 'Снег'
+            case 'Rain':
+                return 'Дождь'
+            case 'Mist':
+                return 'Туман'
+            case 'Smoke':
+                return 'Смог'
+            default:
+                return 'goob'
+        }
     }
     renderPNG =(weather, time)=>{
         if(time > 19 || time < 7 ){
@@ -67,27 +89,32 @@ export default class Box extends Component {
             if(weather === 'Clouds'){
                 return <Cloud/>
             }
+            if(weather === 'Mist'){
+                return <Mist/>
+            }
+            if(weather === 'Smoke'){
+                return <Mist/>
+            }
         }
    
         
     
         
     }
+
     render(){
         const {currentTime} = this.state
-        const {sky, country, city, temp, feelsLike, temp_min, temp_max, windDeg, windSpeed} = this.props
-  
+        const {sky, country, city, temp, feelsLike, temp_min, temp_max, windDeg, windSpeed, sunrise, sunset} = this.props
+
         const wind = this.wind(windDeg)
         const night = this.whatTime(currentTime)
-
-        
         const classes = classnames(
             'box',
             night
         );
         return(
             <div className={classes}>
-                <h4 >10.10.2010  Tuesday</h4>
+                <Clock/>
                 <h3>{city}, {country}</h3>
                 {this.props.children}
                 <div className="box-container">
@@ -96,11 +123,11 @@ export default class Box extends Component {
                         <p>по ощущениям <span>{feelsLike.toFixed(0)}</span></p>
                         <p>min <span>{temp_min.toFixed(0)}</span>max <span>{temp_max.toFixed(0)}</span></p>
                         <p></p>
-                        <p>ветер <span>{windSpeed}</span> m/s направление <span>{wind}</span></p>
+                        <p>ветер <span>{windSpeed}</span> m/s направление <span>{wind||'Южный'}</span></p>
                     </div>
                     <div className="box-container__item">
                         {this.renderPNG(sky, this.state.currentTime)}
-                        <h3>{sky}<span>, {temp.toFixed(0)}C</span></h3>
+                        <h5>{this.translate(sky)}<span>, {temp.toFixed(0)}C</span></h5>
                     </div>
                 </div>
             </div>

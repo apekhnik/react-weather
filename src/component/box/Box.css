@@ -6,21 +6,36 @@
     background-position: 100%;
     padding: 20px;
     box-sizing: border-box;
+    animation: shadow-with-open  1.5s  ease-out;
 }
 .box h3{
     margin-bottom: 24px;
 }
+
+  @keyframes shadow-with-open {
+    from {opacity: 0;}
+    50% {text-shadow: 0 0 20px black;}
+    to {opacity: 1;}
+    }
 .box h4{
     margin-bottom: 15px;
 }
 .box-input {
-    height: 30px;
+    box-sizing: border-box;
     width: 70%;
     margin: 0 auto;
     display: block;
     border-radius: 3px;
     border: transparent;
     margin-bottom: 15px;
+    min-height: 40px;
+}
+.box-input:focus {
+    color: #d35400;
+    font-size: 25px;
+    font-family: 'Roboto Condensed', sans-serif;
+    padding: 5px;
+    outline: none;
 }
 .box-container {
     display: flex;
@@ -30,12 +45,12 @@
     width: 45%;
     padding: 10px;
     text-align: left;
-    background: rgba(19, 15, 64, .7);
+    background: rgba(41, 128, 185, .7);
     border-radius: 10px;
     height: 270px;
 
 }
-.box-container__item h3 {
+.box-container__item h5 {
     text-align: center;
 }
 .box-container__item p{
@@ -46,7 +61,7 @@
     padding: 5px;
     display: inline-block;
     min-width: 40px;
-    background: #000;
+    background: #2c3e50;
     border-radius: 5px;
     text-align: center;
     margin-bottom: 5px;
@@ -76,3 +91,44 @@
     background-image: url('../../img/mistDay.jpg');
     background-size: cover
 }
+.double_dots{
+    animation: dd  2s infinite linear;
+}
+
+@keyframes dd {
+    from {opacity: 0;}
+    
+    to {opacity: 1;}
+    }
+
+
+@media screen and (max-width:420px){
+    .box-container {
+        display: flex;
+
+    }
+    .box {
+        width: 80%;
+        border-radius: 5px;
+        padding: 5px;
+        margin: 0 auto;
+        height: auto;
+    }
+    .box-container__item{
+        width: 40%;
+        height: auto;
+    }
+    .box-container__item p{
+        font-size: 10px;
+    }
+    .box-container__item p span{
+        font-size: 12px;
+        padding: 2px;
+        display: inline-block;
+        min-width: 40px;
+        background: #2c3e50;
+        border-radius: 5px;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+  }

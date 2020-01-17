@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Box from '../../component/box/Box'
 import Loader from '../../component/Loader/Loader'
+import Input from '../../component/Input/Input'
 export default class Weather extends Component {
     state={
         data: [],
@@ -23,7 +24,7 @@ export default class Weather extends Component {
         })
         try{
             const FIND_CITY = this.state.findPlace || 'Лондон'
-            const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${FIND_CITY}&units=metric&APPID=349083c430ac053a45a0745df28c1425`)
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${FIND_CITY}&units=metric&APPID=349083c430ac053a45a0745df28c1425`)
                                         .then(response=>response.json())
             this.setState({
                 data: response,
@@ -40,7 +41,7 @@ export default class Weather extends Component {
                     windSpeed: response.wind.speed,
                     windDeg: response.wind.deg,
                     country: response.sys.country,
-                    sunrise: response.sys.synrise,
+                    sunrise: response.sys.sunrise,
                     sunset: response.sys.sunset,
                     name: response.name
                 },
@@ -49,7 +50,6 @@ export default class Weather extends Component {
             })
             
             console.log(response);
-            console.log(this.state.weather.main);
             
         }catch(e){
             console.log(e);
@@ -67,7 +67,7 @@ export default class Weather extends Component {
     render(){
         const { weather} = this.state
         return(
-            <div>
+            <div className="weather">
                 {/* <input type='text'  onKeyPress={this.findPlace} onChange={this.onChangeHandler} value={this.state.findPlace}/> */}
                 {!this.state.loading 
                 ?
@@ -81,8 +81,10 @@ export default class Weather extends Component {
                 feelsLike={weather.feelsLike}
                 windSpeed={weather.windSpeed}
                 windDeg={weather.windDeg}
+                sunrise={weather.sunrise}
+                sunset={weather.sunset}
                 >
-                <input
+                <Input
                     type="text"
                     className="box-input"
                     onKeyPress={this.findPlace} 
