@@ -1,25 +1,24 @@
 {
   "files": {
-    "main.css": "/react-weather/static/css/main.bba744bb.chunk.css",
-    "main.js": "/react-weather/static/js/main.ab1c7e48.chunk.js",
-    "main.js.map": "/react-weather/static/js/main.ab1c7e48.chunk.js.map",
+    "main.css": "/react-weather/static/css/main.402cce8b.chunk.css",
+    "main.js": "/react-weather/static/js/main.cfcab3c2.chunk.js",
+    "main.js.map": "/react-weather/static/js/main.cfcab3c2.chunk.js.map",
     "runtime-main.js": "/react-weather/static/js/runtime-main.d2b52519.js",
     "runtime-main.js.map": "/react-weather/static/js/runtime-main.d2b52519.js.map",
-    "static/js/2.4833de1c.chunk.js": "/react-weather/static/js/2.4833de1c.chunk.js",
-    "static/js/2.4833de1c.chunk.js.map": "/react-weather/static/js/2.4833de1c.chunk.js.map",
+    "static/js/2.9db60023.chunk.js": "/react-weather/static/js/2.9db60023.chunk.js",
+    "static/js/2.9db60023.chunk.js.map": "/react-weather/static/js/2.9db60023.chunk.js.map",
     "index.html": "/react-weather/index.html",
-    "precache-manifest.d0e3c14043bfd106966dc7fd60ff0c32.js": "/react-weather/precache-manifest.d0e3c14043bfd106966dc7fd60ff0c32.js",
+    "precache-manifest.235b0793487244411a149c2a99c990de.js": "/react-weather/precache-manifest.235b0793487244411a149c2a99c990de.js",
     "service-worker.js": "/react-weather/service-worker.js",
-    "static/css/main.bba744bb.chunk.css.map": "/react-weather/static/css/main.bba744bb.chunk.css.map",
-    "static/js/2.4833de1c.chunk.js.LICENSE": "/react-weather/static/js/2.4833de1c.chunk.js.LICENSE",
-    "static/media/Box.css": "/react-weather/static/media/sunDay.13f5b0a5.jpg",
-    "static/media/logo.svg": "/react-weather/static/media/logo.5d5d9eef.svg",
-    "static/media/Mist.css": "/react-weather/static/media/mist.46312b39.png"
+    "static/css/main.402cce8b.chunk.css.map": "/react-weather/static/css/main.402cce8b.chunk.css.map",
+    "static/js/2.9db60023.chunk.js.LICENSE": "/react-weather/static/js/2.9db60023.chunk.js.LICENSE",
+    "static/media/Box.css": "/react-weather/static/media/night.8ce9da6f.jpg",
+    "static/media/logo.svg": "/react-weather/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.d2b52519.js",
-    "static/js/2.4833de1c.chunk.js",
-    "static/css/main.bba744bb.chunk.css",
-    "static/js/main.ab1c7e48.chunk.js"
+    "static/js/2.9db60023.chunk.js",
+    "static/css/main.402cce8b.chunk.css",
+    "static/js/main.cfcab3c2.chunk.js"
   ]
 }
