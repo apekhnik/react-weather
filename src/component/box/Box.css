@@ -7,6 +7,12 @@
     padding: 20px;
     box-sizing: border-box;
     animation: shadow-with-open  1.5s  ease-out;
+    position: relative;
+}
+.box-badge {
+    position: absolute;
+    top: 15px;
+    right: 40px;
 }
 .box h3{
     margin-bottom: 24px;
@@ -50,7 +56,7 @@
     height: 270px;
 
 }
-.box-container__item h5 {
+.box-container__item h4 {
     text-align: center;
 }
 .box-container__item p{
@@ -72,25 +78,7 @@
 .day{
     background-image: url('../../img/day.jpg');
 }
-.cloudDay{
-    background-image: url('../../img/cloudDay.jpg');
-}
-.rainDay{
-    background-image: url('../../img/rainDay.jpg');
-    background-size: cover
-}
-.clearDay{
-    background-image: url('../../img/sunDay.jpg');
-    background-size: cover
-}
-.snowDay{
-    background-image: url('../../img/snowDay.jpg');
-    background-size: cover
-}
-.mistDay{
-    background-image: url('../../img/mistDay.jpg');
-    background-size: cover
-}
+
 .double_dots{
     animation: dd  2s infinite linear;
 }

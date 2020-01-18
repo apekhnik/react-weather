@@ -10,7 +10,7 @@ export default class Input extends Component {
         return(
             <input 
             onChange={onChange}
-            className={className}
+            className='box-input'
             onKeyPress={onKeyPress}
             value={value}
             ref={this.inputRefs}

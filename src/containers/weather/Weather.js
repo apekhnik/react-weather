@@ -8,7 +8,10 @@ export default class Weather extends Component {
         weather: [],
         coord: [],
         loading: true,
-        findPlace: ''
+        findPlace: '',
+        error: '', 
+        sunrise:'',
+        sunset:''
     }
     async componentDidMount(){
         this.getData()
@@ -26,6 +29,10 @@ export default class Weather extends Component {
             const FIND_CITY = this.state.findPlace || 'Лондон'
             const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${FIND_CITY}&units=metric&APPID=349083c430ac053a45a0745df28c1425`)
                                         .then(response=>response.json())
+            
+            const timezone = await fetch(`http://api.geonames.org/timezoneJSON?lat=${response.coord.lat}&lng=${response.coord.lon}&username=napasponiki`)
+                                        .then(timezone=>timezone.json())
+            console.log(timezone);
             this.setState({
                 data: response,
                 coord: response.coord,
@@ -41,18 +48,25 @@ export default class Weather extends Component {
                     windSpeed: response.wind.speed,
                     windDeg: response.wind.deg,
                     country: response.sys.country,
-                    sunrise: response.sys.sunrise,
-                    sunset: response.sys.sunset,
-                    name: response.name
+                    name: response.name,
+                    sunrise: timezone.sunrise,
+                    sunset: timezone.sunset, 
+                    time: timezone.time
                 },
                 loading: false,
-                findPlace: ''
+                findPlace: '',
+                error: false
             })
             
+            console.log(this.state.weather.sunrise);
             console.log(response);
             
         }catch(e){
-            console.log(e);
+            this.setState({
+                loading: false,
+                error: 'Неверно набран номер'
+            })
+
         }
     }
     findPlace = ({key}) => {
@@ -65,10 +79,11 @@ export default class Weather extends Component {
         }
     }
     render(){
-        const { weather} = this.state
+        const { weather, coord} = this.state
+        console.log(this.state.sunrise);
+        
         return(
             <div className="weather">
-                {/* <input type='text'  onKeyPress={this.findPlace} onChange={this.onChangeHandler} value={this.state.findPlace}/> */}
                 {!this.state.loading 
                 ?
                 <Box
@@ -83,14 +98,14 @@ export default class Weather extends Component {
                 windDeg={weather.windDeg}
                 sunrise={weather.sunrise}
                 sunset={weather.sunset}
-                >
-                <Input
-                    type="text"
-                    className="box-input"
-                    onKeyPress={this.findPlace} 
-                    onChange={this.onChangeHandler}
-                    value={this.state.findPlace}
-                /></Box>:<Loader/>
+                onKeyPress={this.findPlace} 
+                onChange={this.onChangeHandler}
+                value={this.state.findPlace}
+                error={this.state.error}
+                lat={coord.lat}
+                lon={coord.lon}
+                time={weather.time}
+                />:<Loader/>
             }
             </div>
         )

@@ -1,136 +1,95 @@
 import React,{Component} from 'react'
 import './Box.css'
-import Sun from '../planet/sun/Sun'
-import Moon from '../planet/moon/Moon'
-import Cloud from '../planet/cloud/Cloud'
-import Snow from '../planet/Snow/Snow'
 import classnames from 'classnames'
 import Clock from '../Clock/Clock'
-import Mist from '../planet/mist/Mist'
-import RainDay from '../planet/Rain/Rain-day'
-export default class Box extends Component {
-    state ={
-        currentTime: '',
-        actualTime: ''
-    }
-    componentDidMount(){
-        var date = new Date();
-       
-       this.setState({
-        currentTime: date.getHours()
-       })
-    }
-    
-    whatTime(time){
+import Title from '../Title/Title'
+import Input from '../Input/Input'
+import Numeric from '../Numeric/Numeric'
+import Visual from '../visual/Visual'
+import Container from '../container/Container'
+import PropTypes from 'prop-types'
+import Badge from '../Badge/Badge'
+const Box = ({sky, country, city, temp, feelsLike, temp_min, temp_max, windDeg, windSpeed, sunrise, sunset,onKeyPress,onChange,value, error, lat, lon, time}) => {
+    const whatTime=(time)=>{
 
        return  time> 19 || time < 6 ? 'night' : 'day'
        
-    }
-    wind =(deg = 150)=>{
-        if(deg > 180 && deg < 270 ){
-            return 'Юго-Запад'
-        }
-        if(deg > 270 && deg < 360 ){
-            return 'Северо-Запад'
-        }
-        if(deg > 0 && deg < 90 ){
-            return 'Северо-Восток'
-        }
-        if(deg > 180 && deg < 270 ){
-            return 'Юго-Восток'
-        }
-        
-    }
-    translate(weather){
-        
-        switch(weather){
-            case 'Clear':
-                return 'Ясно'
-            case 'Clouds':
-                return 'Облачно'
-            case 'Snow':
-                return 'Снег'
-            case 'Rain':
-                return 'Дождь'
-            case 'Mist':
-                return 'Туман'
-            case 'Smoke':
-                return 'Смог'
-            default:
-                return 'goob'
-        }
-    }
-    renderPNG =(weather, time)=>{
-        if(time > 19 || time < 7 ){
-            //nightttttt
-            if(weather === 'Clear'){
-                return <Moon/>
-            }
-            if(weather === 'Clouds'){
-                return <Cloud/>
-            }
-            if(weather === 'Snow'){
-                return <Snow/>
-            }
-            if(weather === 'Rain'){
-                return <RainDay/>
-            }
-        }else{
-            //day
-            if(weather === 'Snow'){
-                return <Snow/>
-            }
-            if(weather === 'Rain'){
-                return <RainDay/>
-            }
-            if(weather === 'Clear'){
-                return <Sun/>
-            }
-            if(weather === 'Clouds'){
-                return <Cloud/>
-            }
-            if(weather === 'Mist'){
-                return <Mist/>
-            }
-            if(weather === 'Smoke'){
-                return <Mist/>
-            }
-        }
-   
-        
-    
-        
-    }
-
-    render(){
-        const {currentTime} = this.state
-        const {sky, country, city, temp, feelsLike, temp_min, temp_max, windDeg, windSpeed, sunrise, sunset} = this.props
-
-        const wind = this.wind(windDeg)
-        const night = this.whatTime(currentTime)
+    }   
+    console.log(lat, lon);
+        var date = new Date();
+        const night = whatTime(time.substr(11,2))
         const classes = classnames(
             'box',
             night
         );
         return(
-            <div className={classes}>
-                <Clock/>
-                <h3>{city}, {country}</h3>
-                {this.props.children}
-                <div className="box-container">
-                    <div className="box-container__item">
-                        <p>за окном <span>{temp.toFixed(0)}</span></p>
-                        <p>по ощущениям <span>{feelsLike.toFixed(0)}</span></p>
-                        <p>min <span>{temp_min.toFixed(0)}</span>max <span>{temp_max.toFixed(0)}</span></p>
-                        <p></p>
-                        <p>ветер <span>{windSpeed}</span> m/s направление <span>{wind||'Южный'}</span></p>
-                    </div>
-                    <div className="box-container__item">
-                        {this.renderPNG(sky, this.state.currentTime)}
-                        <h5>{this.translate(sky)}<span>, {temp.toFixed(0)}C</span></h5>
-                    </div>
-                </div>
-            </div>
+            <Container className={classes}>
+                <Clock
+                    lat={lat}
+                    lon={lon}
+                />
+                <Title>
+                    {error?`${error}`:`${city},${country}`}
+                </Title>
+                <Badge>
+                {`рассвет: ${sunrise.substr(11)}`}
+                {`закат: ${sunset.substr(11)}`}
+
+                </Badge>
+                <Input
+                    onKeyPress={onKeyPress}
+                    onChange={onChange}
+                    value={value}
+                />
+                <Container className='box-container'>
+                        <Numeric
+                            temp={temp}
+                            feelsLike={feelsLike}
+                            temp_min={temp_min}
+                            temp_max={temp_max}
+                            windSpeed={windSpeed}
+                            windDeg={windDeg}
+                        />
+                        <Visual
+                            time={date.getHours()}
+                            sky={sky}
+                            temp={temp}
+                        />
+                </Container>
+            </Container>
         )
-    }
+    
+}
+export default Box
+Box.propTypes={
+    sky: PropTypes.string, 
+    country: PropTypes.string, 
+    city: PropTypes.string, 
+    temp: PropTypes.number, 
+    feelsLike: PropTypes.number, 
+    temp_min: PropTypes.number, 
+    temp_max: PropTypes.number, 
+    windDeg: PropTypes.number, 
+    windSpeed: PropTypes.number, 
+    sunrise: PropTypes.number, 
+    sunset: PropTypes.number, 
+    onKeyPress: PropTypes.func,
+    onChange: PropTypes.func,
+    value: PropTypes.string
+}
+Box.defaultProps={
+    sky: 'Clear', 
+    country: 'Zimbabve', 
+    city: 'Chita', 
+    temp: '12', 
+    feelsLike: '12',
+    temp_min: '12', 
+    temp_max: '12', 
+    windDeg: 250, 
+    windSpeed: 5, 
+    sunrise: 11, 
+    sunset: 11, 
+    onKeyPress: ()=>{},
+    onChange: ()=>{},
+    value: ''
 }

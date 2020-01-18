@@ -6,18 +6,22 @@ export default class Clock extends Component {
         min: '00',
         hour: '00'
     }
-    componentDidMount(){
+    async componentDidMount(){
         let date = new Date()
-        let timerId = setInterval(() => {
+        
+         let  timerId =  setInterval(async() => {
             var date = new Date();
+            const timezone = await fetch(`http://api.geonames.org/timezoneJSON?lat=${this.props.lat}&lng=${this.props.lon}&username=napasponiki`)
+                                        .then(timezone=>timezone.json())
             this.setState({   
-                time: `${date.getHours()}:${date.getMinutes()}`,
-                min: `${date.getMinutes()}`,
-                hour: date.getHours()
+                time: timezone.time,
+                min:  timezone.time.substr(14),
+                hour: timezone.time.substr(11,2)
             })
         }, 1000);
-        
+        console.log(this.state.time, 'clock');
     }
+
     whatdayIs(){
         let date = new Date()
         const {time, min, hour} = this.state
@@ -25,17 +29,17 @@ export default class Clock extends Component {
             case 1:
                   return <h4>{hour}<span className="double_dots">:</span>{min} Понедельник</h4>
             case 2:
-                return <h4>{time}, Вторник</h4>
+                return<h4>{hour}<span className="double_dots">:</span>{min} Вторник</h4>
             case 3:
-                return <h4>{time}, Среда</h4>
+                return <h4>{hour}<span className="double_dots">:</span>{min} Среда</h4>
             case 4:
-                return <h4>{time}, Четверг</h4>
+                return <h4>{hour}<span className="double_dots">:</span>{min} Четверг</h4>
             case 5:
                 return <h4>{hour}<span className="double_dots">:</span>{min} Пятница</h4>
             case 6:
-                return <h4>{time}, Суббота</h4>
+                return <h4>{hour}<span className="double_dots">:</span>{min} Суббота</h4>
             case 7:
-                return <h4>{time}, Воскресенье</h4>
+                return <h4>{hour}<span className="double_dots">:</span>{min} Воскресенье</h4>
         }
     }
     render(){
