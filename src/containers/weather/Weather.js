@@ -30,7 +30,7 @@ export default class Weather extends Component {
             const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${FIND_CITY}&units=metric&APPID=349083c430ac053a45a0745df28c1425`)
                                         .then(response=>response.json())
             
-            const timezone = await fetch(`http://api.geonames.org/timezoneJSON?lat=${response.coord.lat}&lng=${response.coord.lon}&username=napasponiki`)
+            const timezone = await fetch(`http://api.geonames.org/timezoneJSON?lat=${response.coord.lat}&lng=${response.coord.lon}&username=napas`)
                                         .then(timezone=>timezone.json())
             console.log(timezone);
             this.setState({

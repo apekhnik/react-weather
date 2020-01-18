@@ -8,20 +8,22 @@ export default class Clock extends Component {
     }
     async componentDidMount(){
         let date = new Date()
-        
+        this.ticktack()
          let  timerId =  setInterval(async() => {
-            var date = new Date();
-            const timezone = await fetch(`http://api.geonames.org/timezoneJSON?lat=${this.props.lat}&lng=${this.props.lon}&username=napasponiki`)
-                                        .then(timezone=>timezone.json())
-            this.setState({   
-                time: timezone.time,
-                min:  timezone.time.substr(14),
-                hour: timezone.time.substr(11,2)
-            })
-        }, 1000);
-        console.log(this.state.time, 'clock');
+           this.ticktack()
+        }, 60000);
     }
-
+    async ticktack(){
+        var date = new Date();
+        const timezone = await fetch(`http://api.geonames.org/timezoneJSON?lat=${this.props.lat}&lng=${this.props.lon}&username=napas`)
+                                    .then(timezone=>timezone.json())
+        
+         this.setState({   
+            time: timezone.time,
+            min:  timezone.time.substr(14),
+            hour: timezone.time.substr(11,2)
+        })
+    }
     whatdayIs(){
         let date = new Date()
         const {time, min, hour} = this.state
