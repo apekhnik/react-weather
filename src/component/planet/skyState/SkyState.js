@@ -6,25 +6,20 @@ const SkyState = ({sky, time}) => {
         'sky'
     )
     const iconPicker = (sky) => {
-      
+      const hour = time.substr(11,2)
             switch(sky){
                 case 'Snow':
-                    return 'https://i.gifer.com/3klb.gif'
+                    return hour > 19 || hour < 6 ? 'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_36-512.png':'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_37-512.png'
                 case 'Rain':
-                    return 'https://media.giphy.com/media/gGrEYlSniuiJMlfuR6/giphy.gif'
+                    return hour > 19 || hour < 6 ? 'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_8-512.png':'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_33-512.png'
                 case 'Clear':
-                    if(time > 19 || time < 7){
-                        return 'http://pngimg.com/uploads/moon/moon_PNG40.png'
-                    }else {
-                        return 'https://i.gifer.com/6HhP.gif'
-                    }
-                    
+                   return hour > 19 || hour < 6 ? 'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_4-512.png':'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_3-512.png' 
                 case 'Clouds':
-                    return 'https://i.gifer.com/ODkn.gif'
+                    return hour > 19 || hour < 6 ? 'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_5-512.png':'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_2-512.png'
                 case 'Mist':
-                    return 'http://pngimg.com/uploads/moon/moon_PNG40.png'
+                    return 'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_38-512.png'
                 case 'Smoke':
-                    return 'http://pngimg.com/uploads/moon/moon_PNG40.png'
+                    return 'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_38-512.png'
             }
         }
   

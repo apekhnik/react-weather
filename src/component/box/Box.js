@@ -15,7 +15,7 @@ const Box = ({sky, country, city, temp, feelsLike, temp_min, temp_max, windDeg, 
        return  time> 19 || time < 6 ? 'night' : 'day'
        
     }   
-    console.log(time);
+
         var date = new Date();
         const night = whatTime(time.substr(11,2))
         const classes = classnames(

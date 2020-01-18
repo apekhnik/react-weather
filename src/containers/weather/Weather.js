@@ -58,7 +58,7 @@ export default class Weather extends Component {
                 error: false
             })
             
-            console.log(this.state.weather.sunrise);
+
             console.log(response);
             
         }catch(e){
@@ -80,7 +80,6 @@ export default class Weather extends Component {
     }
     render(){
         const { weather, coord} = this.state
-        console.log(this.state.sunrise);
         
         return(
             <div className="weather">

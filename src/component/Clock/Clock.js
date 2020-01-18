@@ -15,7 +15,7 @@ export default class Clock extends Component {
     }
     async ticktack(){
         var date = new Date();
-        const timezone = await fetch(`http://api.geonames.org/timezoneJSON?lat=${this.props.lat}&lng=${this.props.lon}&username=napas`)
+        const timezone = await fetch(`http://api.geonames.org/timezoneJSON?lat=${this.props.lat}&lng=${this.props.lon}&username=napasponiki`)
                                     .then(timezone=>timezone.json())
         
          this.setState({   

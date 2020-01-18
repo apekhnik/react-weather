@@ -4,7 +4,7 @@ const Badge = ({children}) => {
     return(
         <div className="box-badge">
             {children.map((item)=>{
-            return <p>{item}</p>
+            return <p key={item}>{item}</p>
             })}
         </div>
     )

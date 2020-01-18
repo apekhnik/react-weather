@@ -4,7 +4,6 @@ import Title from '../Title/Title'
 import Text from '../../component/Text/Text'
 const Visual = ({time, sky, temp, sunrise, sunset}) => {     
 
-console.log(sunset, sunrise);
 const translate=(weather)=>{
         
     switch(weather){
