@@ -19,6 +19,8 @@ const translate=(weather)=>{
             return 'Туман'
         case 'Smoke':
             return 'Смог'
+        case 'Fog':
+            return 'Смог'
         default:
             return 'new type of weather'
     }

@@ -17,9 +17,11 @@ const SkyState = ({sky, time}) => {
                 case 'Clouds':
                     return hour > 19 || hour < 6 ? 'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_5-512.png':'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_2-512.png'
                 case 'Mist':
-                    return 'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_38-512.png'
+                    return hour > 19 || hour < 6 ? 'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_50-512.png':'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_49-512.png'
                 case 'Smoke':
-                    return 'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_38-512.png'
+                    return hour > 19 || hour < 6 ? 'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_50-512.png':'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_49-512.png'
+                case 'Fog':
+                    return hour > 19 || hour < 6 ? 'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_50-512.png':'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_49-512.png'
             }
         }
   

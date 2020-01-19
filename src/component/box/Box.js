@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React,{useState} from 'react'
 import './Box.css'
 import classnames from 'classnames'
 import Clock from '../Clock/Clock'
@@ -15,7 +15,7 @@ const Box = ({sky, country, city, temp, feelsLike, temp_min, temp_max, windDeg, 
        return  time> 19 || time < 6 ? 'night' : 'day'
        
     }   
-
+console.log(time);
         var date = new Date();
         const night = whatTime(time.substr(11,2))
         const classes = classnames(
@@ -71,8 +71,8 @@ Box.propTypes={
     temp_max: PropTypes.number, 
     windDeg: PropTypes.number, 
     windSpeed: PropTypes.number, 
-    sunrise: PropTypes.number, 
-    sunset: PropTypes.number, 
+    sunrise: PropTypes.string, 
+    sunset: PropTypes.string, 
     onKeyPress: PropTypes.func,
     onChange: PropTypes.func,
     value: PropTypes.string
