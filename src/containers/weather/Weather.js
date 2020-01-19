@@ -47,7 +47,7 @@ const Weather = () =>{
             setCoord(response.coord)
             setError(false)
             setPlace('')
-           finishLoad()
+            finishLoad()
 
             
         }catch(e){
