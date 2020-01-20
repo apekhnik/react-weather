@@ -1,9 +1,6 @@
-import './Title.css'
 import React from 'react'
-const Title = ({children, tag}) => {
-  
-    return (
-        <h4>{children}</h4>
-    )
-}
+import './Title.css'
+
+const Title = ({ children }) => <h4>{children}</h4>
+
 export default Title
