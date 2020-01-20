@@ -29,12 +29,11 @@ console.log(time);
                     lon={lon}
                 />
                 <Title>
-                    {error?`${error}`:`${city},${country}`}
+                        {error?`${error}`:`${city},${country}`}
                 </Title>
                 <Badge>
-                {`рассвет: ${sunrise.substr(11)}`}
-                {`закат: ${sunset.substr(11)}`}
-
+                        {`рассвет: ${sunrise.substr(11)}`}
+                        {`закат: ${sunset.substr(11)}`}
                 </Badge>
                 <Input
                     onKeyPress={onKeyPress}
@@ -76,20 +75,4 @@ Box.propTypes={
     onKeyPress: PropTypes.func,
     onChange: PropTypes.func,
     value: PropTypes.string
-}
-Box.defaultProps={
-    sky: 'Clear', 
-    country: 'Zimbabve', 
-    city: 'Chita', 
-    temp: '12', 
-    feelsLike: '12',
-    temp_min: '12', 
-    temp_max: '12', 
-    windDeg: 250, 
-    windSpeed: 5, 
-    sunrise: 11, 
-    sunset: 11, 
-    onKeyPress: ()=>{},
-    onChange: ()=>{},
-    value: ''
 }

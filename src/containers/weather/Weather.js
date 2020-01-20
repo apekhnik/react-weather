@@ -17,7 +17,7 @@ const Weather = () =>{
       
         setPlace(e.target.value)
     }
-    const   getData  = async(url)  =>{
+    const getData  = async(url)  =>{
         setLoading(true)
         try{
             const FIND_CITY = findPlace || 'Лондон'
