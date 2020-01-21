@@ -1,100 +1,124 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Box from '../../component/box/Box'
 import Loader from '../../component/Loader/Loader'
+import {ERROR_MESSAGE, FINISH_LOAD_DELAY} from '../../constants'
+const getWeatherEndpoint = city => `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=349083c430ac053a45a0745df28c1425`;
+const getTimezoneEndpoint = ({ lat, lon }) => `http://api.geonames.org/timezoneJSON?lat=${lat}&lng=${lon}&username=napas`;
 
+const toJSON = response => response.json()
 
-const Weather = () =>{
+const Weather = () => {
     const [weather, setWeather] = useState({})
     const [coord, setCoord] = useState([])
     const [loading, setLoading] = useState(true)
     const [findPlace, setPlace] = useState('')
     const [error, setError] = useState('')
-    
+
     useEffect(() => {
         getData()
     }, []);
-    const onChangeHandler = (e) =>{
-      
+    const onChangeHandler = (e) => {
         setPlace(e.target.value)
     }
     const getData  = async(url)  =>{
         setLoading(true)
-        try{
-            const FIND_CITY = findPlace || 'Лондон'
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${FIND_CITY}&units=metric&APPID=349083c430ac053a45a0745df28c1425`)
-                                        .then(response=>response.json())
-            console.log(response);
-            const timezone = await fetch(`http://api.geonames.org/timezoneJSON?lat=${response.coord.lat}&lng=${response.coord.lon}&username=napas`)
-                                        .then(timezone=>timezone.json())
+        try {
+            const searchedCity = findPlace || 'Лондон';
+
+            const {
+                weather,
+                name,
+                coord,
+                main: {
+                    temp,
+                    feels_like,
+                    temp_min,
+                    temp_max,
+                    pressure,
+                    humidity
+                },
+                wind: {
+                    speed: windSpeed,
+                    deg: windDeg
+                },
+                sys: { country }
+            } = await fetch(getWeatherEndpoint(searchedCity)).then(toJSON)
+
+            const { sunrise, sunset, time, timezoneId } = await fetch(getTimezoneEndpoint(coord)).then(toJSON)
+
+            const { main, description } = weather[0];
 
             setWeather({
-                main: response.weather[0].main,
-                description: response.weather[0].description,
-                temp: response.main.temp,
-                feelsLike: response.main.feels_like,
-                temp_min: response.main.temp_min,
-                temp_max: response.main.temp_max,
-                pressure: response.main.pressure,
-                humidity: response.main.humidity,
-                windSpeed: response.wind.speed,
-                windDeg: response.wind.deg,
-                country: response.sys.country,
-                name: response.name,
-                sunrise: timezone.sunrise,
-                sunset: timezone.sunset, 
-                time: timezone.time
-        })
-            setCoord(response.coord)
+                main,
+                description,
+                temp,
+                feels_like,
+                temp_min,
+                temp_max,
+                pressure,
+                humidity,
+                windSpeed,
+                windDeg,
+                country,
+                name,
+                sunrise,
+                sunset,
+                time,
+                timezoneId
+            })
+            setCoord(coord)
             setError(false)
             setPlace('')
             finishLoad()
 
-            
-        }catch(e){
+
+        } catch (e) {
 
             setLoading(false)
-            setError('Неверно набран номер')
+            setError(ERROR_MESSAGE)
             console.log(e);
         }
     }
-    const searchHandler = ({key}) => {
-        if(key === 'Enter'){
-           getData(findPlace)
-           setPlace('')
+    const searchHandler = ({ key }) => {
+        if (key === 'Enter') {
+            getData(findPlace)
+            setPlace('')
         }
     }
-    const finishLoad = () =>{
-        const load = setTimeout(()=>{
+    const finishLoad = () => {
+        const load = setTimeout(() => {
             setLoading(false)
-        },100)
- 
+        }, FINISH_LOAD_DELAY)
+
     }
 
-    return(
+    if (loading) {
+        return <Loader />
+    }
+
+    return (
         <div className="weather">
-            {!loading 
-            ?
             <Box
-                    sky={weather.main}
-                    country={weather.country}
-                    city={weather.name}
-                    temp={weather.temp}
-                    temp_max={weather.temp_max}
-                    temp_min={weather.temp_min}
-                    feelsLike={weather.feelsLike}
-                    windSpeed={weather.windSpeed}
-                    windDeg={weather.windDeg}
-                    sunrise={weather.sunrise}
-                    sunset={weather.sunset}
-                    onKeyPress={searchHandler} 
-                    onChange={onChangeHandler}
-                    value={findPlace}
-                    error={error}
-                    lat={coord.lat}
-                    lon={coord.lon}
-                    time={weather.time}
-            />:<Loader/>
-        }
+                sky={weather.main}
+                country={weather.country}
+                city={weather.name}
+                temp={weather.temp}
+                temp_max={weather.temp_max}
+                temp_min={weather.temp_min}
+                feelsLike={weather.feels_like}
+                windSpeed={weather.windSpeed}
+                windDeg={weather.windDeg}
+                sunrise={weather.sunrise}
+                sunset={weather.sunset}
+                onKeyPress={searchHandler}
+                onChange={onChangeHandler}
+                value={findPlace}
+                error={error}
+                lat={coord.lat}
+                lon={coord.lon}
+                time={weather.time}
+                timezoneID={weather.timezoneId}
+            />
         </div>
     )
 }

@@ -1,0 +1,9 @@
+.indicator {
+    margin: 0 5px 0 5px;
+}
+.max-temp{
+    background: #e74c3c!important;
+}
+.min-temp {
+    background: #ecf0f1!important;
+}

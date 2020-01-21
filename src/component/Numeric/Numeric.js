@@ -1,30 +1,53 @@
 import React from 'react'
-
-
-const Numeric = ({temp, feelsLike,temp_min, temp_max,windDeg, windSpeed, className}) =>{
-const wind =(deg = 150)=>{
-        if(deg > 180 && deg < 270 ){
-            return 'Юго-Запад'
-        }
-        if(deg > 270 && deg < 360 ){
-            return 'Северо-Запад'
-        }
-        if(deg > 0 && deg < 90 ){
-            return 'Северо-Восток'
-        }
-        if(deg > 180 && deg < 270 ){
-            return 'Юго-Восток'
-        }
-        
+import {TO_FIXED} from '../../constants'
+import Text from '../Text/Text'
+import Indicators from '../Indicators/Indicators'
+const getWindDirection = (deg = 150) => {
+    switch (true) {
+        case (deg > 270):
+            return 'Северо-Запад';
+        case (deg > 180):
+            return 'Юго-Запад';
+        case (deg > 90):
+            return 'Юго-Восток';
+        default:
+            return 'Северо-Восток';
+    };
 }
 
-    return(
-        <div className='box-container__item'>
-            <p>за окном <span>{temp.toFixed(0)}</span></p>
-            <p>по ощущениям <span>{feelsLike.toFixed(0)}</span></p>
-            <p>min <span>{temp_min.toFixed(0)}</span>max <span>{temp_max.toFixed(0)}</span></p>
-            <p>ветер <span>{windSpeed}</span> m/s направление <span>{wind(windDeg)||'Южный'}</span></p>
-        </div>
+const Numeric = ({
+    temp,
+    feelsLike,
+    temp_min,
+    temp_max,
+    windDeg,
+    windSpeed
+}) => {
+    const windDirection = getWindDirection(windDeg);
+    const temperature = temp.toFixed(TO_FIXED);
+    const minTemperature = temp_min.toFixed(TO_FIXED);
+    const maxTemperature = temp_max.toFixed(TO_FIXED);
+    const feelsLikeTemperature = feelsLike.toFixed(TO_FIXED);
+
+    return (
+        <>
+ 
+            <Text text="за окном">
+                <Indicators value={temperature}/>
+            </Text>
+            <Text text="по ощущениям">
+                <Indicators value={feelsLikeTemperature}/>
+            </Text>
+            <Text text="min/max">
+                <Indicators value={minTemperature} />
+                <Indicators value={maxTemperature} />
+            </Text>
+            <Text text="ветер m/s ">
+                <Indicators value={windSpeed}/>
+                <Indicators value={windDirection}/>
+            </Text>
+
+        </>
     )
 }
 export default Numeric
