@@ -48,7 +48,8 @@ const Weather = () => {
             } = await fetch(getWeatherEndpoint(searchedCity)).then(toJSON)
             console.log(await fetch(getWeatherEndpoint(searchedCity)).then(toJSON));
             const { sunrise, sunset, time, timezoneId } = await fetch(getTimezoneEndpoint(coord)).then(toJSON)
-
+            
+            
             const { main, description } = weather[0];
 
             setWeather({

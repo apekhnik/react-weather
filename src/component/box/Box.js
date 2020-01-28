@@ -3,6 +3,7 @@ import './Box.css'
 import classnames from 'classnames'
 import Clock from '../Clock/Clock'
 import Title from '../Title/Title'
+import TimeWeather from '../timeWeather/timeWeather'
 import Input from '../Input/Input'
 import Text from '../Text/Text'
 import ContainerItem from '../ContainerItem/ContainerItem'
@@ -95,6 +96,7 @@ const Box = ({
                     />
                 </ContainerItem>
             </Container>
+            <TimeWeather/>
         </Container>
     )
 
