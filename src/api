@@ -1,0 +1,7 @@
+const {list} = await fetch('https://api.openweathermap.org/data/2.5/forecast?q=London,us&units=metric&mode=json&appid=349083c430ac053a45a0745df28c1425')
+                          .then(toJSON)
+
+                          const type = data.filter((item)=>{
+    console.log(item.dt_txt.substr(8,2))
+    return item.dt_txt.substr(8,2) == filter
+})

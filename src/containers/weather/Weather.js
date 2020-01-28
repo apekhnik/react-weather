@@ -3,6 +3,7 @@ import Box from '../../component/box/Box'
 import Loader from '../../component/Loader/Loader'
 import {ERROR_MESSAGE, FINISH_LOAD_DELAY} from '../../constants'
 const getWeatherEndpoint = city => `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=349083c430ac053a45a0745df28c1425`;
+
 const getTimezoneEndpoint = ({ lat, lon }) => `http://api.geonames.org/timezoneJSON?lat=${lat}&lng=${lon}&username=napas`;
 
 const toJSON = response => response.json()
@@ -16,10 +17,12 @@ const Weather = () => {
 
     useEffect(() => {
         getData()
+        
     }, []);
     const onChangeHandler = (e) => {
         setPlace(e.target.value)
     }
+
     const getData  = async(url)  =>{
         setLoading(true)
         try {
@@ -43,7 +46,7 @@ const Weather = () => {
                 },
                 sys: { country }
             } = await fetch(getWeatherEndpoint(searchedCity)).then(toJSON)
-
+            console.log(await fetch(getWeatherEndpoint(searchedCity)).then(toJSON));
             const { sunrise, sunset, time, timezoneId } = await fetch(getTimezoneEndpoint(coord)).then(toJSON)
 
             const { main, description } = weather[0];
